@@ -20,7 +20,7 @@ const App = () => {
     <Router> {/* Wrap with BrowserRouter */}
       <AuthProvider> {/* Wrap with your AuthProvider if needed */}
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           
           {/* Protected routes */}
