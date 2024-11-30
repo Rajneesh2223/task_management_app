@@ -13,13 +13,13 @@ const EditTask = ({ task, onClose, onTaskUpdated }) => {
   const { token } = useAuth();
 
   const handleUpdate = async () => {
-    // Validate inputs
+   
     if (!title || !priority || !startTime || !endTime) {
       alert('Please fill in all fields');
       return;
     }
 
-    // Calculate total time to finish (in hours)
+   
     const startDateTime = new Date(startTime);
     const endDateTime = new Date(endTime);
     const totalTimeTo = Math.abs(endDateTime - startDateTime) / (1000 * 60 * 60);
@@ -37,7 +37,7 @@ const EditTask = ({ task, onClose, onTaskUpdated }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${task._id}`, {
+      const response = await fetch(`https://task-management-app-iike.onrender.com/api/tasks/${task._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

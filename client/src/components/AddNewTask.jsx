@@ -16,12 +16,11 @@ const AddNewTask = ({
   const [error, setError] = useState(null);
   const {token} = useAuth()
 
-  // Handle form submission
+ 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); 
 
-    // Validation checks
-    if (!title.trim()) {
+     if (!title.trim()) {
       setError('Title is required');
       return;
     }
@@ -34,10 +33,8 @@ const AddNewTask = ({
       return;
     }
 
-    // Generate unique task ID
     const taskId = uuidv4();
 
-    // Prepare task data
     const taskData = {
       taskId,
       title: title.trim(),
@@ -50,8 +47,7 @@ const AddNewTask = ({
     };
 
     try {
-      // API call to create task
-      const response = await fetch('http://localhost:5000/api/tasks', {
+      const response = await fetch('https://task-management-app-iike.onrender.com/api/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +57,7 @@ const AddNewTask = ({
         body: JSON.stringify(taskData)
       });
 
-      // Handle response
+    
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || 'Failed to create task');
@@ -69,7 +65,7 @@ const AddNewTask = ({
 
       const result = await response.json();
       
-      // Notify parent component and close modal
+  
       onTaskAdded(result);
       onClose();
 
@@ -79,19 +75,18 @@ const AddNewTask = ({
     }
   };
 
-  // Calculate total time in hours
+ 
   const calculateTotalTime = (start, end) => {
     const diffMs = end - start;
-    return Math.round(diffMs / (1000 * 60 * 60)); // Convert to hours
+    return Math.round(diffMs / (1000 * 60 * 60)); 
   };
 
-  // Render the form
+  
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Create New Task</h2>
         
-        {/* Error message */}
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
             {error}
@@ -99,7 +94,7 @@ const AddNewTask = ({
         )}
 
         <form onSubmit={handleSubmit}>
-          {/* Title Input */}
+        
           <div className="mb-4">
             <label 
               htmlFor="title" 
@@ -118,7 +113,7 @@ const AddNewTask = ({
             />
           </div>
 
-          {/* Priority Select */}
+        
           <div className="mb-4">
             <label 
               htmlFor="priority" 
@@ -140,7 +135,6 @@ const AddNewTask = ({
             </select>
           </div>
 
-          {/* Status Radio Buttons */}
           <div className="mb-4">
             <label className="block text-gray-700 font-semibold mb-2">
               Status
@@ -171,7 +165,6 @@ const AddNewTask = ({
             </div>
           </div>
 
-          {/* Start Time Input */}
           <div className="mb-4">
             <label 
               htmlFor="start-time" 
@@ -189,7 +182,6 @@ const AddNewTask = ({
             />
           </div>
 
-          {/* End Time Input */}
           <div className="mb-6">
             <label 
               htmlFor="end-time" 
@@ -207,7 +199,6 @@ const AddNewTask = ({
             />
           </div>
 
-          {/* Action Buttons */}
           <div className="flex justify-end space-x-4">
             <button
               type="button"

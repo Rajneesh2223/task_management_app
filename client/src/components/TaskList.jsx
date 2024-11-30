@@ -31,7 +31,7 @@ const TaskList = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/tasks', {
+      const response = await axios.get('https://task-management-app-iike.onrender.com/api/tasks', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -95,8 +95,8 @@ const TaskList = () => {
   const handleTaskSelection = (taskId) => {
     setSelectedTasks((prev) =>
       prev.includes(taskId) 
-        ? prev.filter((id) => id !== taskId)  // Remove the task if already selected
-        : [...prev, taskId]  // Add the task if not selected
+        ? prev.filter((id) => id !== taskId)  
+        : [...prev, taskId]  
     );
   };
 
@@ -106,7 +106,7 @@ const TaskList = () => {
     }
 
     try {
-      await axios.delete('http://localhost:5000/api/tasks', {
+      await axios.delete('https://task-management-app-iike.onrender.com/api/tasks', {
         data: { ids: selectedTasks },
         headers: {
           'Authorization': `Bearer ${token}`
@@ -128,17 +128,16 @@ const TaskList = () => {
     setIsAddTaskModalOpen(true);
   };
 
-  // Check if all tasks are selected
+ 
   const isAllSelected = filteredTasks.length > 0 && selectedTasks.length === filteredTasks.length;
 
-  // Check if some tasks are selected (for indeterminate state)
   const isSomeSelected = selectedTasks.length > 0 && selectedTasks.length < filteredTasks.length;
 
   const handleSelectAll = () => {
     if (isAllSelected) {
-      setSelectedTasks([]); // Deselect all
+      setSelectedTasks([]); 
     } else {
-      setSelectedTasks(filteredTasks.map((task) => task.id)); // Select all
+      setSelectedTasks(filteredTasks.map((task) => task.id));
     }
   };
 

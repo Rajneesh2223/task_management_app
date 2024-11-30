@@ -39,7 +39,7 @@ const SignupPage = () => {
       try {
         setLoading(true);
         
-        const response = await axios.post('http://localhost:5000/api/auth/register', {
+        const response = await axios.post('https://task-management-app-iike.onrender.com/api/auth/register', {
           username: formData.username,
           email: formData.email,
           password: formData.password,
